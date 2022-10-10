@@ -14,6 +14,35 @@
       label="Filière"
       class="select"
     />
+    <div>
+      <q-select
+        filled
+        v-model="tags.concours"
+        :options="
+          tagValues.concours[tags.filiere] ?? ['Sélectionnez une filière']
+        "
+        label="Concours"
+        class="select"
+        :disable="!tagValues.concours[tags.filiere]"
+      />
+      <q-tooltip v-if="!tagValues.concours[tags.filiere]">
+        Sélectionne une filière
+      </q-tooltip>
+    </div>
+    <q-select
+      filled
+      v-model="tags.annee"
+      :options="tagValues.annee"
+      label="Année"
+      class="select"
+    />
+    <q-select
+      filled
+      v-model="tags.type"
+      :options="tagValues.type"
+      label="Type"
+      class="select"
+    />
   </div>
 </template>
 
@@ -21,7 +50,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "IndexPage",
+  name: "DropDowns",
   data() {
     return {
       tags: {
@@ -29,8 +58,8 @@ export default defineComponent({
         filiere: null,
         concours: "",
         annee: "",
-        chapitres: [],
-        type: "",
+        chapitre: "",
+        type: "Écrit",
       },
       tagValues: {
         matiere: [
@@ -40,20 +69,22 @@ export default defineComponent({
           "Anglais",
           "Français/Philo",
         ],
-        filiere: ["MP", "PC", "PSI", "PT"],
+        filiere: ["MP", "PC", "PSI", "PT", "BCPST"],
         concours: {
           MP: [],
-          PC: [],
+          PC: ["Polytechnique"],
           PSI: [],
-          PT: [],
+          PT: ["Banque PT"],
+          BCPST: [],
         },
-        annee: [],
+        annee: ["2022", "2021", "2020", "2019", "2018"],
         chapitres: {
           Mathématiques: [],
           Physique: [],
           Chimie: [],
           Anglais: [],
         },
+        type: ["Écrit", "Oral"],
       },
     };
   },
@@ -63,9 +94,12 @@ export default defineComponent({
 <style lang="scss" scoped>
 .dropdowns-wrapper {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: space-around !important;
+  width: 80vw;
   .select {
-    width: 200px;
+    width: 170px !important;
+    margin: 5px;
   }
 }
 </style>
