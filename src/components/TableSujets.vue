@@ -1,5 +1,11 @@
 <template>
-  <q-table class="table" :rows="rows" :columns="columns" row-key="name" />
+  <q-table
+    class="table"
+    :rows="rows"
+    :columns="columns"
+    row-key="name"
+    @row-click="sujetClicked"
+  />
 </template>
 
 <script>
@@ -55,17 +61,27 @@ export default defineComponent({
       ],
       rows: [
         {
+          id: 1,
           annee: 2020,
           matiere: "Mathématiques",
-          sujet: "http://link.com",
-          corrige: "http://link.com",
+          sujet: true,
+          corrige: true,
           chapitres: [],
           credit: "Prof de maths",
         },
       ],
     };
   },
-  methods: {},
+  methods: {
+    sujetClicked(evt, row, index) {
+      this.$router.push({
+        name: "sujetDetail",
+        query: {
+          id: row.id,
+        },
+      });
+    },
+  },
 });
 </script>
 <style lang="scss" scoped>

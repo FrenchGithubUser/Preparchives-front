@@ -2,8 +2,14 @@
   <div class="sujets-wrapper">
     <div class="title">Sujets et corrigés</div>
     <div class="criterias shadow-5">
-      <DropDowns class="dropdowns" />
-      <q-btn no-caps label="Chercher" class="search-button" color="primary" />
+      <DropDowns class="dropdowns" ref="dropdowns" />
+      <q-btn
+        no-caps
+        label="Chercher"
+        class="search-button"
+        color="primary"
+        @click="search"
+      />
     </div>
     <div class="table-wrapper">
       <TableSujets class="shadow-5" />
@@ -22,7 +28,17 @@ export default defineComponent({
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    search() {
+      const tags = this.$refs.dropdowns.tags;
+      const query = {};
+      Object.keys(tags).forEach((key) => {
+        query[key] = tags[key];
+      });
+      console.log(query);
+      this.$router.replace({ query: query });
+    },
+  },
 });
 </script>
 <style lang="scss" scoped>
