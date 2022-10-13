@@ -88,6 +88,14 @@ export default defineComponent({
       },
     };
   },
+  created() {
+    this.tags.matiere = this.$route.query.matiere;
+    this.tags.filiere = this.$route.query.filiere;
+    this.tags.concours = this.$route.query.concours;
+    this.tags.annee = this.$route.query.annee;
+    this.tags.chapitre = this.$route.query.chapitre;
+    this.tags.type = this.$route.query.type ?? this.tags.type;
+  },
   methods: {},
 });
 </script>
