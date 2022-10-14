@@ -5,14 +5,25 @@
     :columns="columns"
     row-key="name"
     @row-click="sujetClicked"
-  />
+  >
+    <template v-slot:body-cell-Sujet="props">
+      <q-td :props="props">
+        {{ props.row.sujet ? "✅" : "❌" }}
+      </q-td>
+    </template>
+    <template v-slot:body-cell-Corrige="props">
+      <q-td :props="props">
+        {{ props.row.corrige ? "✅" : "❌" }}
+      </q-td>
+    </template>
+  </q-table>
 </template>
 
 <script>
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "TableSujets",
+  name: "TableDocuments",
   data() {
     return {
       columns: [
@@ -69,13 +80,22 @@ export default defineComponent({
           chapitres: [],
           credit: "Prof de maths",
         },
+        {
+          id: 2,
+          annee: 2021,
+          matiere: "Physique",
+          sujet: true,
+          corrige: false,
+          chapitres: [],
+          credit: "Prof de physique",
+        },
       ],
     };
   },
   methods: {
     sujetClicked(evt, row, index) {
       this.$router.push({
-        name: "sujetDetail",
+        name: "DocumentDetail",
         query: {
           id: row.id,
         },

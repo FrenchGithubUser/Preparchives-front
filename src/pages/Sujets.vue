@@ -12,7 +12,7 @@
       />
     </div>
     <div class="table-wrapper">
-      <TableSujets class="shadow-5" />
+      <TableDocuments class="shadow-7" />
     </div>
   </div>
 </template>
@@ -20,11 +20,11 @@
 <script>
 import { defineComponent } from "vue";
 import DropDowns from "components/DropDowns";
-import TableSujets from "components/TableSujets";
+import TableDocuments from "components/TableDocuments";
 
 export default defineComponent({
   name: "IndexPage",
-  components: { DropDowns, TableSujets },
+  components: { DropDowns, TableDocuments },
   data() {
     return {};
   },
@@ -67,6 +67,9 @@ export default defineComponent({
   .table-wrapper {
     display: flex;
     justify-content: center;
+    .table {
+      border-radius: 20px;
+    }
   }
 }
 </style>

@@ -24,7 +24,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "SujetDetail",
+  name: "DocumentDetail",
   components: {},
   data() {
     return {

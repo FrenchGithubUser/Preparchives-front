@@ -11,6 +11,7 @@
       label="Chercher un sujet/corrigé"
       class="browse-button"
       @click="goTo('sujets')"
+      color="primary"
     />
   </q-page>
 </template>
