@@ -1,7 +1,7 @@
 <template>
   <div class="login-register popup">
-    <LoginPopup v-if="state === 'login'" />
-    <RegisterPopup v-if="state === 'register'" />
+    <LoginPopup v-if="state === 'login'" @register="state = 'register'" @logged-in="$emit('logged-in')" />
+    <RegisterPopup v-if="state === 'register'" @login="state = 'login'" />
   </div>
 </template>
 

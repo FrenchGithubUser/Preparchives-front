@@ -104,7 +104,16 @@ module.exports = configure(function (ctx) {
       // directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: ["Notify"],
+      config: {
+        notify: {
+          position: "top-right",
+          progress: true,
+          color: "red-2",
+          textColor: "black",
+          timeout: 2000,
+        },
+      },
     },
 
     // animations: 'all', // --- includes all animations
