@@ -17,22 +17,34 @@
           icon="login"
           no-caps
           class="button"
+          @click="login"
         />
       </div>
       <router-view />
     </q-page-container>
+    <q-dialog v-model="loginRegister">
+      <LoginRegisterPopup />
+    </q-dialog>
   </q-layout>
 </template>
 <script>
 import { defineComponent, ref } from "vue";
+import LoginRegisterPopup from "components/auth/LoginRegisterPopup.vue";
 
 export default defineComponent({
   name: "MainLayout",
-  components: {},
-  setup() {
-    return {};
+  components: { LoginRegisterPopup },
+  data() {
+    return {
+      loginRegister: false,
+    };
   },
   created() {},
+  methods: {
+    login() {
+      this.loginRegister = true;
+    },
+  },
 });
 </script>
 <style lang="scss" scoped>

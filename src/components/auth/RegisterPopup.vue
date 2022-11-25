@@ -6,7 +6,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "Register",
+  name: "RegisterPopup",
   data() {
     return {};
   },

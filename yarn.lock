@@ -4479,7 +4479,7 @@
   "resolved" "https://registry.npmjs.org/picomatch/-/picomatch-2.3.1.tgz"
   "version" "2.3.1"
 
-"pinia@^2.0.0", "pinia@^2.0.11":
+"pinia@^2.0.0":
   "integrity" "sha512-u+b8/BC+tmvo3ACbYO2w5NfxHWFOjvvw9DQnyT0dW8aUMCPRQT5QnfZ5R5W2MzZBMTeZRMQI7V/QFbafmM9QHw=="
   "resolved" "https://registry.npmjs.org/pinia/-/pinia-2.0.22.tgz"
   "version" "2.0.22"
