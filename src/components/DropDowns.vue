@@ -58,7 +58,7 @@ export default defineComponent({
         filiere: null,
         concours: "",
         annee: "",
-        chapitre: "",
+        // chapitre: "",
         type: "Écrit",
       },
       tagValues: {
@@ -78,12 +78,12 @@ export default defineComponent({
           BCPST: [],
         },
         annee: ["2022", "2021", "2020", "2019", "2018"],
-        chapitres: {
-          Mathématiques: [],
-          Physique: [],
-          Chimie: [],
-          Anglais: [],
-        },
+        // chapitres: {
+        //   Mathématiques: [],
+        //   Physique: [],
+        //   Chimie: [],
+        //   Anglais: [],
+        // },
         type: ["Écrit", "Oral"],
       },
     };
@@ -93,7 +93,7 @@ export default defineComponent({
     this.tags.filiere = this.$route.query.filiere;
     this.tags.concours = this.$route.query.concours;
     this.tags.annee = this.$route.query.annee;
-    this.tags.chapitre = this.$route.query.chapitre;
+    // this.tags.chapitre = this.$route.query.chapitre;
     this.tags.type = this.$route.query.type ?? this.tags.type;
   },
   methods: {},

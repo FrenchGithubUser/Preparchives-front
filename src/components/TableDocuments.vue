@@ -95,7 +95,7 @@ export default defineComponent({
   methods: {
     sujetClicked(evt, row, index) {
       this.$router.push({
-        name: "DocumentDetail",
+        name: "documentDetail",
         query: {
           id: row.id,
         },

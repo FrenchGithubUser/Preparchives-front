@@ -35,7 +35,6 @@ export default defineComponent({
       Object.keys(tags).forEach((key) => {
         query[key] = tags[key];
       });
-      console.log(query);
       this.$router.replace({ query: query });
     },
   },

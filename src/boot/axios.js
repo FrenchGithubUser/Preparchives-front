@@ -1,5 +1,6 @@
 import { boot } from 'quasar/wrappers'
 import axios from 'axios'
+import { displayErrors } from 'src/helpers/helpers'
 
 // Be careful when using SSR for cross-request state pollution
 // due to creating a Singleton instance here;
@@ -7,9 +8,10 @@ import axios from 'axios'
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const api = axios.create({ baseURL: 'http://212.227.188.157:5000/', headers: {
+axios.defaults.withCredentials = true
+const api = axios.create({withCredentials: true, baseURL: 'http://212.227.188.157:5000/', headers: {
     "Content-Type": "multipart/form-data",
-  } })
+  }})
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
@@ -24,3 +26,12 @@ export default boot(({ app }) => {
 })
 
 export { api }
+
+api.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  function (error) {
+    displayErrors([error.response.data.error])
+  }
+);

@@ -24,3 +24,15 @@ export function register(form) {
         });
     });
 }
+export function sendSujet(form) {
+    return new Promise((resolve, reject) => {
+      return api
+        .post("sujet", form)
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+}
