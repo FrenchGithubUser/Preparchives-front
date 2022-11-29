@@ -32,7 +32,7 @@
       <span>{{ filename }}</span>
     </div>
     <q-btn
-      label="Ajouter un document (pdf)"
+      label="Sélectionner un document (pdf)"
       no-caps
       color="primary"
       @click="$refs.fileInput.click()"
