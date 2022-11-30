@@ -2,8 +2,20 @@
   <div class="login">
     <div class="title">Connexion</div>
     <q-input class="input" v-model="form.username" label="Email/username" />
-    <q-input class="input" v-model="form.password" label="Mot de passe" type="password" />
-    <q-btn class="validate" no-caps label="Valider" color="primary" @click="submit" />
+    <q-input
+      class="input"
+      v-model="form.password"
+      label="Mot de passe"
+      type="password"
+    />
+    <q-btn
+      class="validate"
+      no-caps
+      label="Valider"
+      color="primary"
+      @click="submit"
+      :loading="loading"
+    />
     <div class="no-account">
       Pas encore de compte ?
       <div class="cliquable" @click="$emit('register')">Créer un compte</div>
@@ -14,7 +26,7 @@
 <script>
 import { defineComponent } from "vue";
 import { login } from "../../helpers/apiCalls.js";
-import {jsonToFormdata} from "../../helpers/helpers.js"
+import { jsonToFormdata } from "../../helpers/helpers.js";
 
 export default defineComponent({
   name: "LoginPopup",
@@ -24,15 +36,21 @@ export default defineComponent({
         username: "",
         password: "",
       },
+      loading: false,
     };
   },
   created() {},
   methods: {
     submit() {
-      login(jsonToFormdata(this.form)).then(() => {
-        localStorage.setItem('username', this.form.username)
-        this.$emit('logged-in')
-      });
+      this.loading = true;
+      login(jsonToFormdata(this.form))
+        .then(() => {
+          localStorage.setItem("username", this.form.username);
+          this.$emit("logged-in");
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     },
   },
 });

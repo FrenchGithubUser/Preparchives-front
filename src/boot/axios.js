@@ -27,6 +27,23 @@ export default boot(({ app }) => {
 
 export { api }
 
+// api.interceptors.request.use(
+//   function (config) {
+//     if (config.url !== "/user/register") {
+//       const accessToken = localStorage.getItem('access_token');
+//       if (accessToken) {
+//         config.headers.Authorization="access_token_cookie=" + accessToken;
+//       }
+//       console.log(config.headers)
+//     }
+//     return config;
+//   },
+//   function (error) {
+//     // Do something with request error
+//     return Promise.reject(error);
+//   }
+// );
+
 api.interceptors.response.use(
   function (response) {
     return response;

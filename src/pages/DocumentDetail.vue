@@ -1,20 +1,41 @@
 <template>
   <div class="sujet-detail">
-    <div class="title">Titre sujet</div>
+    <div class="tags">
+      <TagBadge :label="sujetData.matiere" type="matiere" />
+      <TagBadge :label="sujetData.filiere" type="filiere" />
+      <TagBadge :label="sujetData.concours" type="concours" />
+      <TagBadge :label="sujetData.annee" type="annee" />
+      <TagBadge :label="sujetData.type" type="type" />
+    </div>
     <div class="download-buttons">
-      <q-btn no-caps label="Sujet" color="primary" @click="dlSujet" />
-      <q-btn no-caps label="Corrigé" color="primary" @click="dlCorrige" />
+      <q-btn
+        no-caps
+        label="Sujet"
+        color="primary"
+        icon="download"
+        class="btn"
+      />
+      <q-btn
+        no-caps
+        label="Corrigé"
+        color="primary"
+        icon="download"
+        class="btn"
+      />
     </div>
     <div class="feedback">
       <div class="leave-comment">
         <div class="hint">Laisser un commentaire</div>
-        <q-input
-          filled
-          v-model="text"
-          label="Commentaire"
-          class="input"
-          type="textarea"
-        />
+        <div class="comment">
+          <q-input
+            filled
+            v-model="text"
+            label="Commentaire"
+            class="input"
+            type="textarea"
+          />
+          <q-btn label="Envoyer" color="primary" icon="send" no-caps />
+        </div>
       </div>
     </div>
   </div>
@@ -22,14 +43,23 @@
 
 <script>
 import { defineComponent } from "vue";
+import TagBadge from "components/TagBadge";
 
 export default defineComponent({
   name: "DocumentDetail",
-  components: {},
+  components: { TagBadge },
   data() {
     return {
-      sujet: {
-        link: "https://link.link",
+      sujetData: {
+        sujet: "https://link.link",
+        corrige: "https://link.link",
+        matiere: "Mathématiques",
+        filiere: "MP",
+        concours: "Polytechnique",
+        annee: "2021",
+        // chapitre: "",
+        type: "Écrit",
+        credit: "https://link.link",
       },
     };
   },
@@ -43,11 +73,15 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
-  .download-buttons {
-    width: 200px;
+  .tags {
     display: flex;
-    justify-content: space-between;
+  }
+  .download-buttons {
+    display: flex;
     margin-top: 15px;
+    .btn {
+      margin: 10px;
+    }
   }
   .feedback {
     margin-top: 15px;
@@ -55,9 +89,15 @@ export default defineComponent({
       .hint {
         opacity: 0.8;
       }
-      .input {
-        width: 400px;
-        max-width: 80vw;
+      .comment {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .input {
+          width: 400px;
+          max-width: 80vw;
+          margin-bottom: 10px;
+        }
       }
     }
   }

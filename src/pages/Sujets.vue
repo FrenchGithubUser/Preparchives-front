@@ -21,6 +21,7 @@
 import { defineComponent } from "vue";
 import DropDowns from "components/DropDowns";
 import TableDocuments from "components/TableDocuments";
+import { searchSujets } from "src/helpers/apiCalls";
 
 export default defineComponent({
   name: "IndexPage",
@@ -36,6 +37,9 @@ export default defineComponent({
         query[key] = tags[key];
       });
       this.$router.replace({ query: query });
+      searchSujets(tags).then((data) => {
+        console.log(data);
+      });
     },
   },
 });
