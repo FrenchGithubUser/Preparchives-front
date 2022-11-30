@@ -11,61 +11,25 @@
           @click="$router.push({ name: 'addDocument' })"
           v-if="$route.name !== 'addDocument'"
         />
-        <q-btn
-          color="primary"
-          v-if="!username"
-          label="Connexion"
-          icon="login"
-          no-caps
-          class="button"
-          @click="login"
-        />
-        <q-btn
-          color="primary"
-          v-else
-          :label="username"
-          no-caps
-          class="button"
-        />
+
+        <LoginRegisterButton />
       </div>
       <router-view />
     </q-page-container>
-    <q-dialog v-model="loginRegister">
-      <LoginRegisterPopup @logged-in="loggedIn" />
-    </q-dialog>
   </q-layout>
 </template>
 <script>
 import { defineComponent, ref } from "vue";
-import LoginRegisterPopup from "components/auth/LoginRegisterPopup.vue";
+import LoginRegisterButton from "components/auth/LoginRegisterButton";
 
 export default defineComponent({
   name: "MainLayout",
-  components: { LoginRegisterPopup },
+  components: { LoginRegisterButton },
   data() {
-    return {
-      loginRegister: false,
-      username: null,
-    };
+    return {};
   },
-  created() {
-    if (localStorage.getItem("username")) {
-      this.username = localStorage.getItem("username");
-    }
-  },
-  methods: {
-    login() {
-      this.loginRegister = true;
-    },
-    loggedIn() {
-      this.loginRegister = false;
-      this.username = localStorage.getItem("username");
-      this.$q.notify({
-        message: "Vous êtes désormais connecté",
-        color: "positive",
-      });
-    },
-  },
+  created() {},
+  methods: {},
 });
 </script>
 <style lang="scss" scoped>

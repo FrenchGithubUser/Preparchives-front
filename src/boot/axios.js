@@ -9,7 +9,7 @@ import { displayErrors } from 'src/helpers/helpers'
 // "export default () => {}" function below (which runs individually
 // for each client)
 axios.defaults.withCredentials = true
-const api = axios.create({withCredentials: true, baseURL: 'http://212.227.188.157:5000/', headers: {
+const api = axios.create({withCredentials: true, baseURL: 'https://api.preparchive.com/', headers: {
     "Content-Type": "multipart/form-data",
   }})
 

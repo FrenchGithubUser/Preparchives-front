@@ -1,11 +1,19 @@
 <template>
   <div class="sujet-detail">
     <div class="tags">
-      <TagBadge :label="sujetData.matiere" type="matiere" />
-      <TagBadge :label="sujetData.filiere" type="filiere" />
-      <TagBadge :label="sujetData.concours" type="concours" />
-      <TagBadge :label="sujetData.annee" type="annee" />
-      <TagBadge :label="sujetData.type" type="type" />
+      <TagBadge :label="sujetData.matiere" type="matiere" :loading="loading" />
+      <TagBadge :label="sujetData.filiere" type="filiere" :loading="loading" />
+      <TagBadge
+        :label="sujetData.concours"
+        type="concours"
+        :loading="loading"
+      />
+      <TagBadge :label="sujetData.annee" type="annee" :loading="loading" />
+      <TagBadge
+        :label="sujetData.ecrit === 1 ? 'Écrit' : 'Oral'"
+        type="type"
+        :loading="loading"
+      />
     </div>
     <div class="download-buttons">
       <q-btn
@@ -44,6 +52,7 @@
 <script>
 import { defineComponent } from "vue";
 import TagBadge from "components/TagBadge";
+import { getSujet } from "src/helpers/apiCalls";
 
 export default defineComponent({
   name: "DocumentDetail",
@@ -61,11 +70,17 @@ export default defineComponent({
         type: "Écrit",
         credit: "https://link.link",
       },
+      loading: true,
     };
   },
-  methods: {
-    search() {},
+  created() {
+    getSujet(this.$route.query.id).then((data) => {
+      console.log(data);
+      this.sujetData = data;
+      this.loading = false;
+    });
   },
+  methods: {},
 });
 </script>
 <style lang="scss" scoped>

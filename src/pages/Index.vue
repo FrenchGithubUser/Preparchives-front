@@ -1,11 +1,10 @@
 <template>
   <q-page class="index-container">
     <div class="title">PrepArchives</div>
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    />
+    <div class="description">
+      Sujets et corrigés des concours de prépas. Toutes les filiaires, toutes
+      les matières.
+    </div>
     <q-btn
       no-caps
       label="Chercher un sujet/corrigé"
@@ -33,10 +32,18 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   .title {
-    font-size: 2em;
-    margin-bottom: 50px;
-    margin-top: 50px;
+    font-size: 4em;
+    margin-top: -20vh;
+    background: linear-gradient(to right, $primary 0%, #05ec6d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+  }
+  .description {
+    text-align: center;
+    margin: 0px 15px;
   }
   .browse-button {
     margin-top: 50px;
