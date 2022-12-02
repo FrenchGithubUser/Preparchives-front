@@ -83,8 +83,7 @@ export default defineComponent({
       this.form.file = files[0];
     },
     submit() {
-      let tags = this.$refs.dropdowns.tags;
-      tags.ecrit = tags.type === "Écrit" ? 1 : 0;
+      let tags = this.$refs.dropdowns.getTags();
       let errors = [];
       Object.keys(tags).forEach((key) => {
         if (!tags[key]) {

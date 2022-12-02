@@ -56,7 +56,7 @@ export function sendSujet(form) {
 export function searchSujets(tags) {
     return new Promise((resolve, reject) => {
       return api
-        .get("sujet/search?matiere=" + tags.matiere + "&filiere=" + tags.filiere + "&concours=" + tags.concours + "&annee=" + tags.annee + "&type=" + tags.type)
+        .get("sujet/search?matiere=" + tags.matiere + "&filiere=" + tags.filiere + "&concours=" + tags.concours + "&annee=" + tags.annee + "&ecrit=" + tags.ecrit + "&epreuve=" + tags.epreuve)
         .then(({ data }) => {
           resolve(data);
         })

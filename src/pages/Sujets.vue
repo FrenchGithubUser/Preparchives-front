@@ -31,10 +31,13 @@ export default defineComponent({
   },
   methods: {
     search() {
-      const tags = this.$refs.dropdowns.tags;
+      let tags = this.$refs.dropdowns.getTags();
       const query = {};
       Object.keys(tags).forEach((key) => {
         query[key] = tags[key];
+        if (["Tous", "Toutes"].indexOf(tags[key]) >= 0) {
+          tags[key] = "";
+        }
       });
       this.$router.replace({ query: query });
       searchSujets(tags).then((data) => {
