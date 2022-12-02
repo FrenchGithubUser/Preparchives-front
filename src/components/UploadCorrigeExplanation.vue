@@ -1,15 +1,7 @@
 <template>
   <div class="popup">
-    <div class="explanation">
-      Vous pouvez ajouter un corrigé depuis le détail d'un sujet
-    </div>
-    <q-btn
-      label="Chercher un sujet"
-      color="primary"
-      no-caps
-      @click="goToSearch"
-      class="search-btn"
-    />
+    <div class="explanation">Vous pouvez ajouter un corrigé depuis le détail d'un sujet</div>
+    <q-btn label="Chercher un sujet" color="primary" no-caps @click="goToSearch" class="search-btn" />
   </div>
 </template>
 
@@ -23,7 +15,7 @@ export default defineComponent({
   },
   methods: {
     goToSearch() {
-      this.$router.push("sujets");
+      this.$router.push("search");
     },
   },
 });

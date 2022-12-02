@@ -3,45 +3,20 @@
     <div class="tags">
       <TagBadge :label="sujetData.matiere" type="matiere" :loading="loading" />
       <TagBadge :label="sujetData.filiere" type="filiere" :loading="loading" />
-      <TagBadge
-        :label="sujetData.concours"
-        type="concours"
-        :loading="loading"
-      />
+      <TagBadge :label="sujetData.concours" type="concours" :loading="loading" />
       <TagBadge :label="sujetData.annee" type="annee" :loading="loading" />
-      <TagBadge
-        :label="sujetData.ecrit === 1 ? 'Écrit' : 'Oral'"
-        type="type"
-        :loading="loading"
-      />
+      <TagBadge :label="sujetData.ecrit === 1 ? 'Écrit' : 'Oral'" type="type" :loading="loading" />
     </div>
     <div class="download-buttons">
-      <q-btn
-        no-caps
-        label="Sujet"
-        color="primary"
-        icon="download"
-        class="btn"
-      />
-      <q-btn
-        no-caps
-        label="Corrigé"
-        color="primary"
-        icon="download"
-        class="btn"
-      />
+      <q-btn no-caps label="Sujet" color="primary" icon="download" class="btn" />
+      <q-btn no-caps label="Corrigé" color="primary" icon="download" class="btn" />
     </div>
+    <q-btn label="Ajouter un corrigé" color="primary" icon="add" no-caps class="add-correction" @click="addCorrection" />
     <div class="feedback">
       <div class="leave-comment">
         <div class="hint">Laisser un commentaire</div>
         <div class="comment">
-          <q-input
-            filled
-            v-model="text"
-            label="Commentaire"
-            class="input"
-            type="textarea"
-          />
+          <q-input filled v-model="comment" label="Commentaire" class="input" type="textarea" />
           <q-btn label="Envoyer" color="primary" icon="send" no-caps />
         </div>
       </div>
@@ -60,16 +35,14 @@ export default defineComponent({
   data() {
     return {
       sujetData: {
-        sujet: "https://link.link",
-        corrige: "https://link.link",
         matiere: "Mathématiques",
         filiere: "MP",
         concours: "Polytechnique",
         annee: "2021",
         // chapitre: "",
         type: "Écrit",
-        credit: "https://link.link",
       },
+      comment: "",
       loading: true,
     };
   },
@@ -80,7 +53,22 @@ export default defineComponent({
       this.loading = false;
     });
   },
-  methods: {},
+  methods: {
+    addCorrection() {
+      let query = { sujetId: this.sujetData.id };
+      query.matiere = this.sujetData.matiere;
+      query.filiere = this.sujetData.filiere;
+      query.concours = this.sujetData.concours;
+      query.annee = this.sujetData.annee;
+      query.type = this.sujetData.type;
+      query.epreuve = this.sujetData.epreuve;
+      query.type = this.sujetData.ecrit === 1 ? "Écrit" : "Oral";
+      this.$router.push({
+        name: "addDocument",
+        query: query,
+      });
+    },
+  },
 });
 </script>
 <style lang="scss" scoped>
@@ -97,6 +85,9 @@ export default defineComponent({
     .btn {
       margin: 10px;
     }
+  }
+  .add-correction {
+    margin: 15px 0px;
   }
   .feedback {
     margin-top: 15px;

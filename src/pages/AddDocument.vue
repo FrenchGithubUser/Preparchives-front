@@ -3,47 +3,18 @@
     <div class="document-type">
       Mon document est un :
       <div class="buttons">
-        <q-btn
-          label="Sujet"
-          no-caps
-          :color="type === 'sujet' && !null ? 'primary' : ''"
-          :text-color="type === 'sujet' && !null ? '' : 'black'"
-          @click="type = 'sujet'"
-        />
-        <q-btn
-          label="Corrigé"
-          no-caps
-          :color="type === 'corrige' && !null ? 'primary' : ''"
-          :text-color="type === 'corrige' && !null ? '' : 'black'"
-          @click="uploadCorrigeExplanation = true"
-        />
+        <q-btn label="Sujet" no-caps :color="type === 'sujet' && !null ? 'primary' : ''" :text-color="type === 'sujet' && !null ? '' : 'black'" @click="type = 'sujet'" />
+        <q-btn label="Corrigé" no-caps :color="type === 'corrige' && !null ? 'primary' : ''" :text-color="type === 'corrige' && !null ? '' : 'black'" @click="uploadCorrigeExplanation = true" />
       </div>
     </div>
-    <DropDowns ref="dropdowns" class="dropdowns" :showEpreuve="true" />
-    <input
-      type="file"
-      style="display: none"
-      ref="fileInput"
-      accept="application/pdf"
-      @change="onFilePicked"
-    />
+    <DropDowns ref="dropdowns" class="dropdowns" :showEpreuve="true" :disable="type === 'corrige'" />
+    <input type="file" style="display: none" ref="fileInput" accept="application/pdf" @change="onFilePicked" />
     <div v-if="filename" class="filename">
       <span>Fichier ajouté :</span>
       <span>{{ filename }}</span>
     </div>
-    <q-btn
-      label="Sélectionner un document (pdf)"
-      no-caps
-      color="primary"
-      @click="$refs.fileInput.click()"
-    />
-    <q-btn
-      label="Envoyer"
-      no-caps
-      color="primary"
-      class="submit"
-      @click="submit"
-    />
+    <q-btn label="Sélectionner un document (pdf)" no-caps color="primary" @click="$refs.fileInput.click()" />
+    <q-btn label="Envoyer" no-caps color="primary" class="submit" @click="submit" :loading="loading" />
     <q-dialog v-model="uploadCorrigeExplanation">
       <UploadCorrigeExplanation />
     </q-dialog>
@@ -55,7 +26,7 @@ import { defineComponent } from "vue";
 import DropDowns from "components/DropDowns";
 import UploadCorrigeExplanation from "components/UploadCorrigeExplanation";
 import { displayErrors, jsonToFormdata } from "src/helpers/helpers";
-import { sendSujet } from "src/helpers/apiCalls";
+import { sendCorrection, sendSujet } from "src/helpers/apiCalls";
 
 export default defineComponent({
   name: "AddDocument",
@@ -63,6 +34,7 @@ export default defineComponent({
   data() {
     return {
       uploadCorrigeExplanation: false,
+      loading: false,
       type: "sujet",
       filename: null,
       form: {
@@ -76,6 +48,11 @@ export default defineComponent({
       },
     };
   },
+  created() {
+    if (this.$route.query.sujetId) {
+      this.type = "corrige";
+    }
+  },
   methods: {
     onFilePicked(event) {
       const files = event.target.files;
@@ -83,23 +60,50 @@ export default defineComponent({
       this.form.file = files[0];
     },
     submit() {
+      this.loading = true;
+      if (!this.form.file) {
+        displayErrors(["Sélectionnez un fichier pdf"]);
+        this.loading = false;
+        return;
+      }
+      this.type === "sujet" ? this.submitSujet() : this.submitCorrection();
+    },
+    submitCorrection() {
+      const correctionInfo = {
+        id_sujet: this.$route.query.sujetId,
+        file: this.form.file,
+      };
+      sendCorrection(jsonToFormdata(correctionInfo))
+        .then(() => {
+          this.$router.push({ name: "thankYou" });
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+    submitSujet() {
       let tags = this.$refs.dropdowns.getTags();
       let errors = [];
       Object.keys(tags).forEach((key) => {
-        if (!tags[key]) {
+        if (["Toutes", "Tous"].indexOf(tags[key]) >= 0) {
+          console.log(key, tags[key]);
           errors.push("Sélectionnez l'attribut " + key);
         } else {
           this.form[key] = tags[key];
         }
       });
-      if (!this.form.file) {
-        errors.push("Sélectionnez un fichier pdf");
+      if (errors.length !== 0) {
+        this.loading = false;
+        displayErrors(errors);
       }
-      displayErrors(errors);
       if (errors.length === 0) {
-        sendSujet(jsonToFormdata(this.form)).then(() => {
-          this.$router.push({ name: "thankYou" });
-        });
+        sendSujet(jsonToFormdata(this.form))
+          .then(() => {
+            this.$router.push({ name: "thankYou" });
+          })
+          .finally(() => {
+            this.loading = false;
+          });
       }
     },
   },

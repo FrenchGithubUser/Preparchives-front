@@ -3,16 +3,10 @@
     <div class="title">Sujets et corrigés</div>
     <div class="criterias shadow-5">
       <DropDowns class="dropdowns" ref="dropdowns" />
-      <q-btn
-        no-caps
-        label="Chercher"
-        class="search-button"
-        color="primary"
-        @click="search"
-      />
+      <q-btn no-caps label="Chercher" class="search-button" color="primary" @click="search" />
     </div>
     <div class="table-wrapper">
-      <TableDocuments class="shadow-7" />
+      <TableDocuments :loading="loading" class="shadow-7" :rows="rows" />
     </div>
   </div>
 </template>
@@ -24,13 +18,17 @@ import TableDocuments from "components/TableDocuments";
 import { searchSujets } from "src/helpers/apiCalls";
 
 export default defineComponent({
-  name: "IndexPage",
+  name: "SearchSujets",
   components: { DropDowns, TableDocuments },
   data() {
-    return {};
+    return {
+      loading: false,
+      rows: [],
+    };
   },
   methods: {
     search() {
+      this.loading = true;
       let tags = this.$refs.dropdowns.getTags();
       const query = {};
       Object.keys(tags).forEach((key) => {
@@ -41,7 +39,8 @@ export default defineComponent({
       });
       this.$router.replace({ query: query });
       searchSujets(tags).then((data) => {
-        console.log(data);
+        this.rows = data;
+        this.loading = false;
       });
     },
   },

@@ -5,7 +5,7 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', name: 'index', component: () => import('src/pages/Index.vue') },
-      { path: 'sujets', name: 'sujets', component: () => import('src/pages/Sujets.vue') },
+      { path: 'search', name: 'search', component: () => import('src/pages/Search.vue') },
       { path: 'sujets/detail', name: 'documentDetail', component: () => import('src/pages/DocumentDetail.vue') },
       { path: 'ajouterDocument', name: 'addDocument', component: () => import('src/pages/AddDocument.vue') },
       { path: 'merci', name: 'thankYou', component: () => import('src/pages/ThankYou.vue') },

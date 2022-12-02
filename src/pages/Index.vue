@@ -5,13 +5,7 @@
       Sujets et corrigés des concours de prépas. Toutes les filiaires, toutes
       les matières.
     </div>
-    <q-btn
-      no-caps
-      label="Chercher un sujet/corrigé"
-      class="browse-button"
-      @click="goTo('sujets')"
-      color="primary"
-    />
+    <q-btn no-caps label="Chercher un sujet/corrigé" class="browse-button" @click="goTo('search')" color="primary" />
   </div>
 </template>
 
@@ -36,6 +30,7 @@ export default defineComponent({
   height: var(--page-height);
   .title {
     font-size: 4em;
+    margin-top: -20%;
   }
   .description {
     text-align: center;

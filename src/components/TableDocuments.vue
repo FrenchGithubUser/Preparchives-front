@@ -1,20 +1,13 @@
 <template>
-  <q-table
-    class="table"
-    :rows="rows"
-    :columns="columns"
-    row-key="name"
-    @row-click="sujetClicked"
-  >
+  <q-table class="table" :rows="rows" :columns="columns" row-key="name" @row-click="sujetClicked" :loading="loading">
     <template v-slot:body-cell-Sujet="props">
-      <q-td :props="props">
-        {{ props.row.sujet ? "✅" : "❌" }}
-      </q-td>
+      <q-td :props="props">{{ props.row.sujet ? "✅" : "❌" }}</q-td>
     </template>
     <template v-slot:body-cell-Corrige="props">
-      <q-td :props="props">
-        {{ props.row.corrige ? "✅" : "❌" }}
-      </q-td>
+      <q-td :props="props">{{ props.row.has_correction ? "✅" : "❌" }}</q-td>
+    </template>
+    <template v-slot:body-cell-Type="props">
+      <q-td :props="props">{{ props.row.ecrit ? "Écrit" : "Oral" }}</q-td>
     </template>
   </q-table>
 </template>
@@ -24,6 +17,7 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "TableDocuments",
+  props: { rows: { type: Array }, loading: { type: Boolean } },
   data() {
     return {
       columns: [
@@ -42,12 +36,19 @@ export default defineComponent({
           align: "left",
         },
         {
-          name: "Chapitres",
-          label: "Chapitres",
-          field: (row) => row.chapitres,
+          name: "Concours",
+          label: "Concours",
+          field: (row) => row.concours,
           sortable: true,
           align: "left",
         },
+        // {
+        //   name: "Chapitres",
+        //   label: "Chapitres",
+        //   field: (row) => row.chapitres,
+        //   sortable: true,
+        //   align: "left",
+        // },
         {
           name: "Sujet",
           label: "Sujet",
@@ -63,33 +64,40 @@ export default defineComponent({
           align: "left",
         },
         {
-          name: "Credit",
-          label: "Crédit",
-          field: (row) => row.credit,
+          name: "Type",
+          label: "Type",
+          field: (row) => row.ecrit,
           sortable: true,
           align: "left",
         },
+        // {
+        //   name: "Credit",
+        //   label: "Crédit",
+        //   field: (row) => row.credit,
+        //   sortable: true,
+        //   align: "left",
+        // },
       ],
-      rows: [
-        {
-          id: 1,
-          annee: 2020,
-          matiere: "Mathématiques",
-          sujet: true,
-          corrige: true,
-          chapitres: [],
-          credit: "Prof de maths",
-        },
-        {
-          id: 2,
-          annee: 2021,
-          matiere: "Physique",
-          sujet: true,
-          corrige: false,
-          chapitres: [],
-          credit: "Prof de physique",
-        },
-      ],
+      // rows: [
+      //   {
+      //     id: 1,
+      //     annee: 2020,
+      //     matiere: "Mathématiques",
+      //     sujet: true,
+      //     corrige: true,
+      //     chapitres: [],
+      //     credit: "Prof de maths",
+      //   },
+      //   {
+      //     id: 2,
+      //     annee: 2021,
+      //     matiere: "Physique",
+      //     sujet: true,
+      //     corrige: false,
+      //     chapitres: [],
+      //     credit: "Prof de physique",
+      //   },
+      // ],
     };
   },
   methods: {

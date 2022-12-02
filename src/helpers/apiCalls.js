@@ -53,6 +53,18 @@ export function sendSujet(form) {
         });
     });
 }
+export function sendCorrection(form) {
+    return new Promise((resolve, reject) => {
+      return api
+        .post("correction", form)
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+}
 export function searchSujets(tags) {
     return new Promise((resolve, reject) => {
       return api

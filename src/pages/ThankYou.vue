@@ -1,12 +1,7 @@
 <template>
   <div class="thanks page">
     <div class="title theme-gradient">Merci pour votre ajout !</div>
-    <q-btn
-      no-caps
-      label="Retour à l'accueil"
-      color="primary"
-      @click="$router.push({ name: 'index' })"
-    />
+    <q-btn no-caps label="Retour à l'accueil" color="primary" @click="$router.push({ name: 'index' })" />
   </div>
 </template>
 
@@ -27,38 +22,31 @@ export default defineComponent({
       confetti({
         particleCount: 150,
         angle: 60,
-        spread: 50,
-        origin: { x: 0, y: 0.7 },
+        spread: 1000,
+        origin: { x: 0, y: 0.4 },
         colors: colors,
       });
       confetti({
-        particleCount: 75,
+        particleCount: 150,
         angle: 120,
-        spread: 50,
-        origin: { x: 1, y: 0.5 },
-        colors: colors,
-      });
-      confetti({
-        particleCount: 75,
-        angle: 120,
-        spread: 50,
-        origin: { x: 1, y: 1 },
+        spread: 1000,
+        origin: { x: 1, y: 0.4 },
         colors: colors,
       });
     }
     function confettiAfter() {
       confetti({
-        particleCount: 20,
+        particleCount: 40,
         angle: 60,
-        spread: 50,
-        origin: { x: 0, y: 0.7 },
+        spread: 150,
+        origin: { x: 0, y: 0.5 },
         colors: colors,
       });
       confetti({
-        particleCount: 20,
+        particleCount: 40,
         angle: 120,
-        spread: 50,
-        origin: { x: 1, y: 0.7 },
+        spread: 150,
+        origin: { x: 1, y: 0.5 },
         colors: colors,
       });
     }

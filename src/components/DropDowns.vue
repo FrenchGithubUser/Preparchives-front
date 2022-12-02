@@ -1,53 +1,17 @@
 <template>
   <div class="dropdowns-wrapper">
-    <q-select
-      filled
-      v-model="tags.matiere"
-      :options="tagValues.matiere"
-      label="Matière"
-      class="select"
-    />
-    <q-select
-      filled
-      v-model="tags.filiere"
-      :options="tagValues.filiere"
-      label="Filière"
-      class="select"
-    />
+    <q-select filled v-model="tags.matiere" :options="tagValues.matiere" label="Matière" class="select" :disable="disable" />
+    <q-select filled v-model="tags.filiere" :options="tagValues.filiere" label="Filière" class="select" :disable="disable" />
     <!-- <div> -->
-    <q-select
-      filled
-      v-model="tags.concours"
-      :options="tagValues.concours"
-      label="Concours"
-      class="select"
-    />
+    <q-select filled v-model="tags.concours" :options="tagValues.concours" label="Concours" class="select" :disable="disable" />
     <!-- :disable="!tagValues.concours[tags.filiere]"
       <q-tooltip v-if="!tagValues.concours[tags.filiere]">
         Sélectionne une filière
-      </q-tooltip> -->
+    </q-tooltip>-->
     <!-- </div> -->
-    <q-select
-      filled
-      v-model="tags.annee"
-      :options="tagValues.annee"
-      label="Année"
-      class="select"
-    />
-    <q-select
-      filled
-      v-model="tags.type"
-      :options="tagValues.type"
-      label="Type"
-      class="select"
-    />
-    <q-select
-      filled
-      v-model="tags.epreuve"
-      :options="tagValues.epreuve"
-      label="Épreuve"
-      class="select"
-    />
+    <q-select filled v-model="tags.annee" :options="tagValues.annee" label="Année" class="select" :disable="disable" />
+    <q-select filled v-model="tags.type" :options="tagValues.type" label="Type" class="select" :disable="disable" />
+    <q-select filled v-model="tags.epreuve" :options="tagValues.epreuve" label="Épreuve" class="select" :disable="disable" />
   </div>
 </template>
 
@@ -56,7 +20,10 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "DropDowns",
-  props: { showEpreuve: { type: Boolean, default: false } },
+  props: {
+    showEpreuve: { type: Boolean, default: false },
+    disable: { type: Boolean, default: false },
+  },
   data() {
     return {
       tags: {
@@ -64,7 +31,7 @@ export default defineComponent({
         filiere: "Toutes",
         concours: "Tous",
         annee: "Toutes",
-        type: "Écrit",
+        type: "Tous",
         epreuve: "Toutes",
         // chapitre: "",
       },
@@ -95,13 +62,6 @@ export default defineComponent({
     };
   },
   created() {
-    // this.tags.matiere = this.$route.query.matiere;
-    // this.tags.filiere = this.$route.query.filiere;
-    // this.tags.concours = this.$route.query.concours;
-    // this.tags.annee = this.$route.query.annee;
-    // this.tags.chapitre = this.$route.query.chapitre;
-    // this.tags.type = this.$route.query.type ?? this.tags.type;
-    // this.tags.epreuve = this.$route.query.epreuve ?? this.tags.epreuve;
     Object.keys(this.tags).forEach((tag) => {
       this.tags[tag] = this.$route.query[tag] ?? this.tags[tag];
     });
