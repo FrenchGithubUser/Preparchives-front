@@ -11,20 +11,25 @@
           @click="$router.push({ name: 'addDocument' })"
           v-if="$route.name !== 'addDocument'"
         />
-
         <LoginRegisterButton />
       </div>
       <router-view />
+      <div class="footer">
+        <FooterItem label="À propos" />
+        <FooterItem label="Contact" />
+        <FooterItem label="Conditions d'utilisation" />
+      </div>
     </q-page-container>
   </q-layout>
 </template>
 <script>
 import { defineComponent, ref } from "vue";
 import LoginRegisterButton from "components/auth/LoginRegisterButton";
+import FooterItem from "components/FooterItem";
 
 export default defineComponent({
   name: "MainLayout",
-  components: { LoginRegisterButton },
+  components: { LoginRegisterButton, FooterItem },
   data() {
     return {};
   },
@@ -40,5 +45,11 @@ export default defineComponent({
   .button {
     margin-right: 10px;
   }
+}
+.footer {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 </style>

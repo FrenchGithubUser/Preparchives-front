@@ -1,5 +1,5 @@
 <template>
-  <div class="sujet-detail">
+  <div class="sujet-detail page">
     <div class="tags">
       <TagBadge :label="sujetData.matiere" type="matiere" :loading="loading" />
       <TagBadge :label="sujetData.filiere" type="filiere" :loading="loading" />

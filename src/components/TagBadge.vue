@@ -1,5 +1,5 @@
 <template>
-  <div class="tag-badge">
+  <div class="tag-badge shadow-3">
     <div class="badge" v-if="!loading">
       <img
         v-if="type !== 'annee'"
@@ -30,9 +30,9 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .tag-badge {
-  background-color: $primary;
+  background-color: $secondary;
   border-radius: 10px;
-  margin: 2px;
+  margin: 3px;
   .badge {
     color: white;
     padding: 7px;

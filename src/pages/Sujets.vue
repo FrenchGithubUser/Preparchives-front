@@ -1,5 +1,5 @@
 <template>
-  <div class="sujets-wrapper">
+  <div class="sujets-wrapper page">
     <div class="title">Sujets et corrigés</div>
     <div class="criterias shadow-5">
       <DropDowns class="dropdowns" ref="dropdowns" />

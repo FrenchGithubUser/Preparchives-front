@@ -1,6 +1,6 @@
 <template>
-  <q-page class="index-container">
-    <div class="title">PrepArchives</div>
+  <div class="index-container">
+    <div class="title theme-gradient">PrepArchive</div>
     <div class="description">
       Sujets et corrigés des concours de prépas. Toutes les filiaires, toutes
       les matières.
@@ -12,7 +12,7 @@
       @click="goTo('sujets')"
       color="primary"
     />
-  </q-page>
+  </div>
 </template>
 
 <script>
@@ -33,13 +33,9 @@ export default defineComponent({
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: var(--page-height);
   .title {
     font-size: 4em;
-    margin-top: -20vh;
-    background: linear-gradient(to right, $primary 0%, #05ec6d 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: bold;
   }
   .description {
     text-align: center;

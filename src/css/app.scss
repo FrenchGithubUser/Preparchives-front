@@ -15,3 +15,12 @@
     cursor: pointer;
     color: $primary;
 }
+.page{
+  min-height: var(--page-height);
+}
+.theme-gradient{
+    background: linear-gradient(to right, $primary 0%, #05ec6d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}

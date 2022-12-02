@@ -1,5 +1,5 @@
 <template>
-  <div class="add-document">
+  <div class="add-document page">
     <div class="document-type">
       Mon document est un :
       <div class="buttons">
@@ -19,7 +19,7 @@
         />
       </div>
     </div>
-    <DropDowns ref="dropdowns" class="dropdowns" />
+    <DropDowns ref="dropdowns" class="dropdowns" :showEpreuve="true" />
     <input
       type="file"
       style="display: none"
@@ -83,7 +83,8 @@ export default defineComponent({
       this.form.file = files[0];
     },
     submit() {
-      const tags = this.$refs.dropdowns.tags;
+      let tags = this.$refs.dropdowns.tags;
+      tags.ecrit = tags.type === "Écrit" ? 1 : 0;
       let errors = [];
       Object.keys(tags).forEach((key) => {
         if (!tags[key]) {
@@ -92,13 +93,14 @@ export default defineComponent({
           this.form[key] = tags[key];
         }
       });
-      console.log(this.form);
       if (!this.form.file) {
         errors.push("Sélectionnez un fichier pdf");
       }
       displayErrors(errors);
       if (errors.length === 0) {
-        sendSujet(jsonToFormdata(this.form));
+        sendSujet(jsonToFormdata(this.form)).then(() => {
+          this.$router.push({ name: "thankYou" });
+        });
       }
     },
   },

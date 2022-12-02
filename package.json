@@ -1,8 +1,8 @@
 {
-  "name": "preparchives",
+  "name": "preparchive",
   "version": "0.0.1",
   "description": "Service référençant les annales de concours de prépa, et plus !",
-  "productName": "Preparchives",
+  "productName": "Preparchive",
   "author": "Etudiants UTC",
   "private": true,
   "scripts": {
@@ -13,6 +13,7 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
+    "canvas-confetti": "^1.6.0",
     "core-js": "^3.6.5",
     "mitt": "^3.0.0",
     "quasar": "^2.6.0",

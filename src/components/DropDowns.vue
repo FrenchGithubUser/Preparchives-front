@@ -43,6 +43,13 @@
       label="Type"
       class="select"
     />
+    <q-select
+      filled
+      v-model="tags.epreuve"
+      :options="tagValues.epreuve"
+      label="Épreuve"
+      class="select"
+    />
   </div>
 </template>
 
@@ -51,6 +58,7 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "DropDowns",
+  props: { showEpreuve: { type: Boolean, default: false } },
   data() {
     return {
       tags: {
@@ -63,19 +71,23 @@ export default defineComponent({
       },
       tagValues: {
         matiere: [
-          "Mathématiques",
+          "Mathematiques",
           "Physique",
           "Chimie",
+          "SI",
+          "Informatique",
+          "Biologie",
           "Anglais",
-          "Français/Philo",
+          "Français-Philo",
         ],
-        filiere: ["MP", "PC", "PSI", "PT", "BCPST"],
+        filiere: ["MP", "PC", "PSI", "PT", "BCPST", "TSI"],
         concours: {
           MP: [],
           PC: ["Polytechnique"],
           PSI: [],
           PT: ["Banque PT"],
           BCPST: [],
+          TSI: [],
         },
         annee: ["2022", "2021", "2020", "2019", "2018"],
         // chapitres: {
@@ -85,6 +97,7 @@ export default defineComponent({
         //   Anglais: [],
         // },
         type: ["Écrit", "Oral"],
+        epreuve: ["a", "b", "c"],
       },
     };
   },

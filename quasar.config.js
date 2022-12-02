@@ -161,8 +161,8 @@ module.exports = configure(function (ctx) {
       
 
       manifest: {
-        name: `Preparchives`,
-        short_name: `Preparchives`,
+        name: `Preparchive`,
+        short_name: `Preparchive`,
         description: `Service référençant les annales de concours de prépa, et plus !`,
         display: 'standalone',
         orientation: 'portrait',
@@ -228,7 +228,7 @@ module.exports = configure(function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'preparchives'
+        appId: 'preparchive'
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain

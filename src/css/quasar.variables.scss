@@ -23,3 +23,9 @@ $positive  : #21BA45;
 $negative  : #C10015;
 $info      : #31CCEC;
 $warning   : #F2C037;
+
+:root{
+    --footer-height: 50px;
+    --header-height: 46px;
+    --page-height: calc(100vh - var(--footer-height) - var(--header-height) - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+}
