@@ -89,3 +89,15 @@ export function getSujet(id) {
         });
     });
 }
+export function sendComment(form) {
+    return new Promise((resolve, reject) => {
+      return api
+        .post("commentaire", form)
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+}

@@ -1,11 +1,7 @@
 <template>
   <div class="tag-badge shadow-3">
     <div class="badge" v-if="!loading">
-      <img
-        v-if="type !== 'annee'"
-        :src="'icons/tags/' + label + '.svg'"
-        class="tag-icon"
-      />
+      <img v-if="type !== 'annee'" :src="'icons/tags/' + label + '.svg'" class="tag-icon" />
       {{ label }}
     </div>
     <q-skeleton class="loading" v-else />
@@ -37,6 +33,8 @@ export default defineComponent({
     color: white;
     padding: 7px;
     display: flex;
+    align-items: center;
+    height: 100%;
     .tag-icon {
       width: 20px;
       margin-right: 5px;

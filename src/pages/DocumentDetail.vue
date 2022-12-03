@@ -9,31 +9,37 @@
     </div>
     <div class="download-buttons">
       <q-btn no-caps label="Sujet" color="primary" icon="download" class="btn" />
-      <q-btn no-caps label="Corrigé" color="primary" icon="download" class="btn" />
+      <q-btn no-caps label="Corrigé" color="primary" icon="download" class="btn" @click="downloadCorrectionPopup = true" />
     </div>
-    <q-btn label="Ajouter un corrigé" color="primary" icon="add" no-caps class="add-correction" @click="addCorrection" />
+    <q-btn label="Ajouter un corrigé pour ce sujet" color="primary" icon="add" no-caps class="add-correction" @click="addCorrection" />
     <div class="feedback">
       <div class="leave-comment">
         <div class="hint">Laisser un commentaire</div>
         <div class="comment">
           <q-input filled v-model="comment" label="Commentaire" class="input" type="textarea" />
-          <q-btn label="Envoyer" color="primary" icon="send" no-caps />
+          <q-btn label="Envoyer" color="primary" icon="send" :loading="sendingComment" no-caps @click="submitComment" />
         </div>
       </div>
     </div>
+    <q-dialog v-model="downloadCorrectionPopup">
+      <DownloadCorrection />
+    </q-dialog>
   </div>
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import TagBadge from "components/TagBadge";
-import { getSujet } from "src/helpers/apiCalls";
+import DownloadCorrection from "components/popups/DownloadCorrection";
+import { getSujet, sendComment } from "src/helpers/apiCalls";
+import { jsonToFormdata } from "src/helpers/helpers";
 
 export default defineComponent({
   name: "DocumentDetail",
-  components: { TagBadge },
+  components: { TagBadge, DownloadCorrection },
   data() {
     return {
+      loading: true,
       sujetData: {
         matiere: "Mathématiques",
         filiere: "MP",
@@ -43,7 +49,8 @@ export default defineComponent({
         type: "Écrit",
       },
       comment: "",
-      loading: true,
+      sendingComment: false,
+      downloadCorrectionPopup: false,
     };
   },
   created() {
@@ -54,6 +61,13 @@ export default defineComponent({
     });
   },
   methods: {
+    submitComment() {
+      this.sendingComment = true;
+      let form = { contenu: this.comment, id_sujet: this.$route.query.id };
+      sendComment(jsonToFormdata(form)).finally(() => {
+        this.sendingComment = false;
+      });
+    },
     addCorrection() {
       let query = { sujetId: this.sujetData.id };
       query.matiere = this.sujetData.matiere;
@@ -78,6 +92,9 @@ export default defineComponent({
   align-items: center;
   .tags {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
   }
   .download-buttons {
     display: flex;

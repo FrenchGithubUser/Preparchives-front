@@ -24,7 +24,7 @@
 <script>
 import { defineComponent } from "vue";
 import DropDowns from "components/DropDowns";
-import UploadCorrigeExplanation from "components/UploadCorrigeExplanation";
+import UploadCorrigeExplanation from "components/popups/UploadCorrigeExplanation";
 import { displayErrors, jsonToFormdata } from "src/helpers/helpers";
 import { sendCorrection, sendSujet } from "src/helpers/apiCalls";
 

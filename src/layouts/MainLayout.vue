@@ -2,22 +2,14 @@
   <q-layout>
     <q-page-container>
       <div class="header">
-        <q-btn
-          color="primary"
-          label="Ajouter"
-          icon="add"
-          no-caps
-          class="button"
-          @click="$router.push({ name: 'addDocument' })"
-          v-if="$route.name !== 'addDocument'"
-        />
+        <q-btn color="primary" label="Ajouter" icon="add" no-caps class="button" @click="$router.push({ name: 'addDocument' })" v-if="$route.name !== 'addDocument'" />
         <LoginRegisterButton />
       </div>
       <router-view />
       <div class="footer">
-        <FooterItem label="À propos" />
-        <FooterItem label="Contact" />
-        <FooterItem label="Conditions d'utilisation" />
+        <FooterItem label="À propos" link="about" />
+        <FooterItem label="Contact" link="contact" />
+        <FooterItem label="Conditions d'utilisation" link="terms" />
       </div>
     </q-page-container>
   </q-layout>
@@ -33,7 +25,9 @@ export default defineComponent({
   data() {
     return {};
   },
-  created() {},
+  created() {
+    // this.$q.dark.set(true);
+  },
   methods: {},
 });
 </script>

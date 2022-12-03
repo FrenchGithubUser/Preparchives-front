@@ -1,5 +1,5 @@
 <template>
-  <q-table class="table" :rows="rows" :columns="columns" row-key="name" @row-click="sujetClicked" :loading="loading">
+  <q-table class="table" :rows="rows" :columns="columns" row-key="name" @row-click="sujetClicked" :loading="loading" :rows-per-page-options="[25, 50]">
     <template v-slot:body-cell-Sujet="props">
       <q-td :props="props">{{ props.row.sujet ? "✅" : "❌" }}</q-td>
     </template>

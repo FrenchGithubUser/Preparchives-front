@@ -1,6 +1,8 @@
 <template>
   <div class="footer-item">
-    <div class="label">{{ label }}</div>
+    <router-link :to="link" style="text-decoration: none;">
+      <div class="label">{{ label }}</div>
+    </router-link>
   </div>
 </template>
 
@@ -12,6 +14,7 @@ export default defineComponent({
   props: {
     label: { type: String },
     icon: { type: String },
+    link: { type: String },
   },
   data() {
     return {};
@@ -22,6 +25,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .footer-item {
   margin: 0px 15px;
-  cursor: pointer;
+  .label {
+  }
 }
 </style>
