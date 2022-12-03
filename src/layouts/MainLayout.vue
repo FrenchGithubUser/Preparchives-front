@@ -7,7 +7,7 @@
       </div>
       <router-view />
       <div class="footer">
-        <FooterItem label="À propos" link="about" />
+        <FooterItem label="À propos" link="à-propos" />
         <FooterItem label="Contact" link="contact" />
         <FooterItem label="Conditions d'utilisation" link="terms" />
       </div>

@@ -1,10 +1,7 @@
 <template>
-  <div class="about">
+  <div class="about page">
     <div class="title theme-gradient">À propos</div>
-    <div class="description">
-      Sujets et corrigés des concours de prépas. Toutes les filiaires, toutes
-      les matières.
-    </div>
+    <div class="description"></div>
   </div>
 </template>
 
@@ -12,11 +9,17 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "About",
+  name: "AboutWebsite",
   methods: {},
 });
 </script>
 <style lang="scss" scoped>
-.index-container {
+.about {
+  padding: 10px;
+  .title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 3em;
+  }
 }
 </style>
