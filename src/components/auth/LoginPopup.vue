@@ -57,7 +57,6 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .login {
-  padding: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;

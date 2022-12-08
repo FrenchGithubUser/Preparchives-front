@@ -46,7 +46,6 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .popup {
-  padding: 15px;
   text-align: center;
   .search-btn {
     margin-top: 15px;

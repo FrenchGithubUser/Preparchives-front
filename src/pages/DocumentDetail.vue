@@ -33,6 +33,15 @@
       />
     </div>
     <q-btn
+      no-caps
+      label="Signaler"
+      color="primary"
+      icon="warning"
+      class="btn"
+      dense
+      @click="reportDocumentPopup = true"
+    />
+    <q-btn
       label="Ajouter un corrigé pour ce sujet"
       color="primary"
       icon="add"
@@ -65,6 +74,9 @@
     <q-dialog v-model="downloadCorrectionPopup">
       <DownloadCorrection />
     </q-dialog>
+    <q-dialog v-model="reportDocumentPopup">
+      <ReportDocument />
+    </q-dialog>
   </div>
 </template>
 
@@ -72,12 +84,13 @@
 import { defineComponent } from "vue";
 import TagBadge from "components/TagBadge";
 import DownloadCorrection from "components/popups/DownloadCorrection";
+import ReportDocument from "components/popups/ReportDocument";
 import { getSujet, sendComment } from "src/helpers/apiCalls";
 import { jsonToFormdata } from "src/helpers/helpers";
 
 export default defineComponent({
   name: "DocumentDetail",
-  components: { TagBadge, DownloadCorrection },
+  components: { TagBadge, DownloadCorrection, ReportDocument },
   data() {
     return {
       loading: true,
@@ -92,6 +105,7 @@ export default defineComponent({
       comment: "",
       sendingComment: false,
       downloadCorrectionPopup: false,
+      reportDocumentPopup: false,
     };
   },
   created() {
