@@ -3,9 +3,15 @@
     <div class="title">Sujets et corrigés</div>
     <div class="criterias shadow-5">
       <DropDowns class="dropdowns" ref="dropdowns" />
-      <q-btn no-caps label="Chercher" class="search-button" color="primary" @click="search" />
+      <q-btn
+        no-caps
+        label="Chercher"
+        class="search-button"
+        color="primary"
+        @click="search"
+      />
     </div>
-    <div class="table-wrapper">
+    <div class="table-wrapper" v-if="searched">
       <TableDocuments :loading="loading" class="shadow-7" :rows="rows" />
     </div>
   </div>
@@ -24,6 +30,7 @@ export default defineComponent({
     return {
       loading: false,
       rows: [],
+      searched: false,
     };
   },
   methods: {
@@ -41,6 +48,7 @@ export default defineComponent({
       searchSujets(tags).then((data) => {
         this.rows = data;
         this.loading = false;
+        this.searched = true;
       });
     },
   },

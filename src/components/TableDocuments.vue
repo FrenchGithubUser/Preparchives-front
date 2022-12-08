@@ -1,8 +1,14 @@
 <template>
-  <q-table class="table" :rows="rows" :columns="columns" row-key="name" @row-click="sujetClicked" :loading="loading" :rows-per-page-options="[25, 50]">
-    <template v-slot:body-cell-Sujet="props">
-      <q-td :props="props">{{ props.row.sujet ? "✅" : "❌" }}</q-td>
-    </template>
+  <q-table
+    class="table"
+    :rows="rows"
+    :columns="columns"
+    row-key="name"
+    @row-click="sujetClicked"
+    :loading="loading"
+    :rows-per-page-options="[25, 50]"
+    no-data-label="Aucun résultat"
+  >
     <template v-slot:body-cell-Corrige="props">
       <q-td :props="props">{{ props.row.has_correction ? "✅" : "❌" }}</q-td>
     </template>
@@ -17,7 +23,10 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "TableDocuments",
-  props: { rows: { type: Array }, loading: { type: Boolean } },
+  props: {
+    rows: { type: Array },
+    loading: { type: Boolean },
+  },
   data() {
     return {
       columns: [
@@ -50,16 +59,16 @@ export default defineComponent({
         //   align: "left",
         // },
         {
-          name: "Sujet",
-          label: "Sujet",
-          field: (row) => row.sujet,
+          name: "Corrige",
+          label: "Corrigé",
+          field: (row) => row.corrige,
           sortable: true,
           align: "left",
         },
         {
-          name: "Corrige",
-          label: "Corrigé",
-          field: (row) => row.corrige,
+          name: "Filière",
+          label: "Filière",
+          field: (row) => row.filiere,
           sortable: true,
           align: "left",
         },

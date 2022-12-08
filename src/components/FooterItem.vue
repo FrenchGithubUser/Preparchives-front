@@ -1,6 +1,6 @@
 <template>
   <div class="footer-item">
-    <router-link :to="link" style="text-decoration: none;">
+    <router-link :to="link" style="text-decoration: none">
       <div class="label">{{ label }}</div>
     </router-link>
   </div>
@@ -25,7 +25,5 @@ export default defineComponent({
 <style lang="scss" scoped>
 .footer-item {
   margin: 0px 15px;
-  .label {
-  }
 }
 </style>

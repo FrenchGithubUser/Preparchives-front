@@ -3,21 +3,62 @@
     <div class="tags">
       <TagBadge :label="sujetData.matiere" type="matiere" :loading="loading" />
       <TagBadge :label="sujetData.filiere" type="filiere" :loading="loading" />
-      <TagBadge :label="sujetData.concours" type="concours" :loading="loading" />
+      <TagBadge
+        :label="sujetData.concours"
+        type="concours"
+        :loading="loading"
+      />
       <TagBadge :label="sujetData.annee" type="annee" :loading="loading" />
-      <TagBadge :label="sujetData.ecrit === 1 ? 'Écrit' : 'Oral'" type="type" :loading="loading" />
+      <TagBadge
+        :label="sujetData.ecrit === 1 ? 'Écrit' : 'Oral'"
+        type="type"
+        :loading="loading"
+      />
     </div>
     <div class="download-buttons">
-      <q-btn no-caps label="Sujet" color="primary" icon="download" class="btn" />
-      <q-btn no-caps label="Corrigé" color="primary" icon="download" class="btn" @click="downloadCorrectionPopup = true" />
+      <q-btn
+        no-caps
+        label="Sujet"
+        color="primary"
+        icon="download"
+        class="btn"
+      />
+      <q-btn
+        no-caps
+        label="Corrigé"
+        color="primary"
+        icon="download"
+        class="btn"
+        @click="downloadCorrectionPopup = true"
+      />
     </div>
-    <q-btn label="Ajouter un corrigé pour ce sujet" color="primary" icon="add" no-caps class="add-correction" @click="addCorrection" />
+    <q-btn
+      label="Ajouter un corrigé pour ce sujet"
+      color="primary"
+      icon="add"
+      no-caps
+      class="add-correction"
+      @click="addCorrection"
+    />
     <div class="feedback">
       <div class="leave-comment">
         <div class="hint">Laisser un commentaire</div>
         <div class="comment">
-          <q-input filled v-model="comment" label="Commentaire" class="input" type="textarea" />
-          <q-btn label="Envoyer" color="primary" icon="send" :loading="sendingComment" no-caps @click="submitComment" />
+          <q-input
+            filled
+            v-model="comment"
+            label="Commentaire"
+            class="input"
+            type="textarea"
+          />
+          <q-btn
+            label="Envoyer"
+            color="primary"
+            icon="send"
+            :loading="sendingComment"
+            no-caps
+            @click="submitComment"
+          />
         </div>
       </div>
     </div>
@@ -62,6 +103,10 @@ export default defineComponent({
   },
   methods: {
     submitComment() {
+      if (!localStorage.getItem("username")) {
+        this.emitter.emit("popup:open", "account-needed");
+        return;
+      }
       this.sendingComment = true;
       let form = { contenu: this.comment, id_sujet: this.$route.query.id };
       sendComment(jsonToFormdata(form)).finally(() => {

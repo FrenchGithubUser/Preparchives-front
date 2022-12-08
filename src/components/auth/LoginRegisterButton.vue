@@ -44,8 +44,14 @@ export default defineComponent({
     if (localStorage.getItem("username")) {
       this.username = localStorage.getItem("username");
     }
+    this.emitter.on("popup:open", this.openPopup);
   },
   methods: {
+    openPopup(name) {
+      if (name === "login-register") {
+        this.loginRegister = true;
+      }
+    },
     login() {
       this.loginRegister = true;
     },
@@ -62,6 +68,9 @@ export default defineComponent({
         color: "positive",
       });
     },
+  },
+  beforeUnmount() {
+    this.emitter.off("popup:open", this.openPopup);
   },
 });
 </script>

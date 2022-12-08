@@ -9,7 +9,9 @@ const routes = [
       { path: 'sujets/detail', name: 'documentDetail', component: () => import('src/pages/DocumentDetail.vue') },
       { path: 'ajouter-document', name: 'addDocument', component: () => import('src/pages/AddDocument.vue') },
       { path: 'merci', name: 'thankYou', component: () => import('src/pages/ThankYou.vue') },
-      { path: 'à-propos', name: 'about', component: () => import('src/pages/footer/About.vue') },
+      { path: 'à-propos', name: 'aboutWebsite', component: () => import('src/pages/footer/AboutWebsite.vue') },
+      { path: 'contact', name: 'contactUs', component: () => import('src/pages/footer/Contact.vue') },
+      { path: 'conditions-dutilisation', name: 'termsOfUse', component: () => import('src/pages/footer/TermsOfUse.vue') },
     ]
   },
 
