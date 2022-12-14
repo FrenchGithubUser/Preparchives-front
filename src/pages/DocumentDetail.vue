@@ -16,13 +16,17 @@
       />
     </div>
     <div class="download-buttons">
-      <q-btn
-        no-caps
-        label="Sujet"
-        color="primary"
-        icon="download"
-        class="btn"
-      />
+      <a
+        :href="'https://api.preparchive.com/sujet/pdf?id=' + $route.query.id"
+        target="_blank"
+      >
+        <q-btn
+          no-caps
+          label="Sujet"
+          color="primary"
+          icon="download"
+          class="btn"
+      /></a>
       <q-btn
         no-caps
         label="Corrigé"

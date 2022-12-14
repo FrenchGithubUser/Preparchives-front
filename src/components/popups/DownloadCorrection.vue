@@ -18,13 +18,12 @@
       </ul>
     </div>
     <div class="credit">Source originale de cette correction :</div>
-    <q-btn
-      label="Voir le corrigé"
-      color="primary"
-      no-caps
-      @click="goToSearch"
-      class="btn"
-    />
+    <a
+      :href="'https://api.preparchive.com/correction/pdf?id=' + $route.query.id"
+      target="_blank"
+    >
+      <q-btn label="Voir le corrigé" color="primary" no-caps class="btn" />
+    </a>
   </div>
 </template>
 
