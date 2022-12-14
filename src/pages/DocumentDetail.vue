@@ -49,6 +49,9 @@
       class="add-correction"
       @click="addCorrection"
     />
+    <div class="comments">
+      <Comment v-for="comment in comments" :key="comment" :comment="comment" />
+    </div>
     <div class="feedback">
       <div class="leave-comment">
         <div class="hint">Laisser un commentaire</div>
@@ -85,12 +88,13 @@ import { defineComponent } from "vue";
 import TagBadge from "components/TagBadge";
 import DownloadCorrection from "components/popups/DownloadCorrection";
 import ReportDocument from "components/popups/ReportDocument";
-import { getSujet, sendComment } from "src/helpers/apiCalls";
+import Comment from "components/Comment";
+import { getSujet, sendComment, getCommentaires } from "src/helpers/apiCalls";
 import { jsonToFormdata } from "src/helpers/helpers";
 
 export default defineComponent({
   name: "DocumentDetail",
-  components: { TagBadge, DownloadCorrection, ReportDocument },
+  components: { TagBadge, DownloadCorrection, ReportDocument, Comment },
   data() {
     return {
       loading: true,
@@ -103,6 +107,7 @@ export default defineComponent({
         type: "Écrit",
       },
       comment: "",
+      comments: [],
       sendingComment: false,
       downloadCorrectionPopup: false,
       reportDocumentPopup: false,
@@ -113,6 +118,9 @@ export default defineComponent({
       console.log(data);
       this.sujetData = data;
       this.loading = false;
+    });
+    getCommentaires(this.$route.query.id).then((data) => {
+      this.comments = data;
     });
   },
   methods: {
@@ -125,6 +133,11 @@ export default defineComponent({
       let form = { contenu: this.comment, id_sujet: this.$route.query.id };
       sendComment(jsonToFormdata(form)).finally(() => {
         this.sendingComment = false;
+        this.comments.push({
+          contenu: this.comment,
+          username: localStorage.getItem("username"),
+        });
+        this.comment = "";
       });
     },
     addCorrection() {

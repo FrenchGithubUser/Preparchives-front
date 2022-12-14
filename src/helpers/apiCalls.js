@@ -89,6 +89,18 @@ export function getSujet(id) {
         });
     });
 }
+export function getCommentaires(sujetId) {
+    return new Promise((resolve, reject) => {
+      return api
+        .get("sujet/commentaire?id=" + sujetId)
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+}
 export function sendComment(form) {
     return new Promise((resolve, reject) => {
       return api
