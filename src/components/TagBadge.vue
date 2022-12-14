@@ -1,7 +1,11 @@
 <template>
   <div class="tag-badge shadow-3">
     <div class="badge" v-if="!loading">
-      <img v-if="type !== 'annee'" :src="'icons/tags/' + label + '.svg'" class="tag-icon" />
+      <img
+        v-if="type !== 'annee'"
+        :src="'icon/tags/' + label + '.svg'"
+        class="tag-icon"
+      />
       {{ label }}
     </div>
     <q-skeleton class="loading" v-else />
