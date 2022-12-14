@@ -2,16 +2,23 @@
   <q-layout>
     <q-page-container>
       <div class="header">
-        <q-btn
-          color="primary"
-          label="Ajouter"
-          icon="add"
-          no-caps
-          class="button"
-          @click="addDocument"
-          v-if="$route.name !== 'addDocument'"
-        />
-        <LoginRegisterButton />
+        <div class="left">
+          <router-link to="/" style="text-decoration: none">
+            <img src="icon/favicon-96x96.png" alt="logo" />
+          </router-link>
+        </div>
+        <div class="right">
+          <q-btn
+            color="primary"
+            label="Ajouter"
+            icon="add"
+            no-caps
+            class="button"
+            @click="addDocument"
+            v-if="$route.name !== 'addDocument'"
+          />
+          <LoginRegisterButton />
+        </div>
       </div>
       <router-view />
       <div class="footer">
@@ -55,8 +62,19 @@ export default defineComponent({
 <style lang="scss" scoped>
 .header {
   display: flex;
-  justify-content: right;
-  padding-top: 10px;
+  justify-content: space-between;
+  padding-top: 5px;
+  .left {
+    margin-left: 10px;
+    img {
+      width: 50px;
+    }
+  }
+  .right {
+    display: flex;
+    align-items: center;
+    height: 40px;
+  }
   .button {
     margin-right: 10px;
   }
