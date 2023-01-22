@@ -106,8 +106,10 @@ export default defineComponent({
           "Banque PT",
           "CCINP",
           "E3A Polytech",
-          "Mines Ponts",
-          "Centrale Supelec",
+          "Mines Ponts (CCMP)",
+          "Centrale Supelec (CCS)",
+          "Polytechnique (CCP)",
+          "Concours National Commun (CNC)",
         ],
         annee: [
           "Toutes",
