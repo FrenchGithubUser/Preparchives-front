@@ -1,4 +1,4 @@
-# Preparchive (preparchive)
+# Preparchive
 
 Service référençant les annales de concours de prépa, et plus !
 
