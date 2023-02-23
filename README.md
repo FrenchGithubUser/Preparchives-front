@@ -2,5 +2,6 @@
 
 Service référençant les annales de concours de prépa, et plus !
 
-
-![home](./home.jpg)
+<p align="center">
+  <img src="./home.jpg" />
+</p>
